@@ -124,10 +124,6 @@ add_subdirectory( src )
 
 add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 
-# Add all targets to the build-tree export set
-export(TARGETS ${TARGETS}
-   FILE ${PROJECT_BINARY_DIR}/${PACKAGE_UPPER_NAME}Targets.cmake)
-
 if(REGISTER_PACKAGE)
    # Export the package for use from the build-tree
    # (this registers the build-tree with a global CMake-registry)
@@ -137,24 +133,6 @@ endif()
 # Create the ZLIBConfig.cmake file
 configure_file(cmake/PackageConfig.cmake.in
    ${PROJECT_BINARY_DIR}/${PACKAGE_UPPER_NAME}Config.cmake @ONLY)
-
-if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
-    install(TARGETS ${TARGETS}
-        EXPORT ${PACKAGE_UPPER_NAME}Targets
-        RUNTIME DESTINATION ${INSTALL_BIN_DIR}
-        LIBRARY DESTINATION ${INSTALL_LIB_DIR}
-        ARCHIVE DESTINATION ${INSTALL_LIB_DIR}
-        INCLUDES DESTINATION ${INSTALL_INC_DIR}
-        FRAMEWORK DESTINATION ${INSTALL_LIB_DIR} )
-                
-   # Install the <Package>Config.cmake
-   install(FILES
-     ${PROJECT_BINARY_DIR}/${PACKAGE_UPPER_NAME}Config.cmake
-     DESTINATION ${INSTALL_CMAKECONF_DIR} COMPONENT dev)
-
-   # Install the export set for use with the install-tree
-   install(EXPORT ${PACKAGE_UPPER_NAME}Targets DESTINATION ${INSTALL_CMAKECONF_DIR} COMPONENT dev)
-endif()
 
 # Archiving ====================================================================
 

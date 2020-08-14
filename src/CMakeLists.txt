@@ -227,10 +227,29 @@ if( ICONV_FOUND )
     target_link_libraries( ${LIB_NAME} PRIVATE ${ICONV_LIBRARIES} )
 endif()
 
+# Add all targets to the build-tree export set
+export(TARGETS ${TARGETS}
+   FILE ${PROJECT_BINARY_DIR}/${PACKAGE_UPPER_NAME}Targets.cmake)
 
 if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
+    install(TARGETS ${TARGETS}
+        EXPORT ${PACKAGE_UPPER_NAME}Targets
+        RUNTIME DESTINATION ${INSTALL_BIN_DIR}
+        LIBRARY DESTINATION ${INSTALL_LIB_DIR}
+        ARCHIVE DESTINATION ${INSTALL_LIB_DIR}
+        INCLUDES DESTINATION ${INSTALL_INC_DIR}
+        FRAMEWORK DESTINATION ${INSTALL_LIB_DIR} )
+        
     install(FILES
         ${CMAKE_BINARY_DIR}/exv_conf.h
         ${CMAKE_BINARY_DIR}/exiv2lib_export.h
         DESTINATION ${INSTALL_INC_DIR}/exiv2)
+        
+    # Install the <Package>Config.cmake
+    install(FILES
+     ${PROJECT_BINARY_DIR}/${PACKAGE_UPPER_NAME}Config.cmake
+     DESTINATION ${INSTALL_CMAKECONF_DIR} COMPONENT dev)
+
+    # Install the export set for use with the install-tree
+    install(EXPORT ${PACKAGE_UPPER_NAME}Targets DESTINATION ${INSTALL_CMAKECONF_DIR} COMPONENT dev)
 endif()
