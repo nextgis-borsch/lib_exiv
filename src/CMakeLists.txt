@@ -236,3 +236,5 @@ if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
         ${CMAKE_BINARY_DIR}/exiv2lib_export.h
         DESTINATION ${INSTALL_INC_DIR}/exiv2)
 endif()
+
+message(STATUS "Targets : ${TARGETS}")

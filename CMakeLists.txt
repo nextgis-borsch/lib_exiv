@@ -121,6 +121,8 @@ include(cmake/compilerFlagsExiv2.cmake REQUIRED)
 add_subdirectory( include )
 add_subdirectory( src )
 
+message(STATUS "Targets: ${TARGETS}")
+
 add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 
 # Add all targets to the build-tree export set
