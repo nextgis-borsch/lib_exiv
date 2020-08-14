@@ -21,7 +21,7 @@
 ################################################################################
 
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
-project(exiv2lib)
+project(exiv)
 
 if(NOT DEFINED PACKAGE_VENDOR)
     set(PACKAGE_VENDOR NextGIS)
@@ -64,7 +64,7 @@ endif()
 set(PACKAGE_NAME ${PROJECT_NAME})
 string(TOUPPER ${PACKAGE_NAME} PACKAGE_UPPER_NAME)
 
-set(LIB_NAME ${PROJECT_NAME})
+set(LIB_NAME exiv2lib)
 set(TARGETS ${LIB_NAME})
 
 include(util)
