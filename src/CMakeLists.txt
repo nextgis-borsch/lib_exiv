@@ -99,8 +99,6 @@ add_library( ${LIB_NAME}
     $<TARGET_OBJECTS:${LIB_NAME}_int>
 )
 
-set(TARGETS ${TARGETS} ${LIB_NAME} PARENT_SCOPE)
-
 generate_export_header(${LIB_NAME}
     EXPORT_MACRO_NAME EXIV2API
     EXPORT_FILE_NAME ${CMAKE_BINARY_DIR}/exiv2lib_export.h
