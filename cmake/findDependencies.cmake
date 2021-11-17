@@ -1,12 +1,12 @@
 # set include path for FindXXX.cmake files
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
 include(FindAnyProject)
 
-# don't use Frameworks on the Mac (#966)
-if (APPLE)
-     set(CMAKE_FIND_FRAMEWORK NEVER)
-endif()
+# # don't use Frameworks on the Mac (#966)
+# if (APPLE)
+#      set(CMAKE_FIND_FRAMEWORK NEVER)
+# endif()
 
 # Check if the conan file exist to find the dependencies
 if (EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
@@ -18,12 +18,12 @@ endif()
 find_package(Threads REQUIRED)
 
 if( EXIV2_ENABLE_PNG )
-    find_anyproject( ZLIB REQUIRED )
+    find_anyproject(ZLIB REQUIRED)
 endif( )
 
 if( EXIV2_ENABLE_WEBREADY )
     if( EXIV2_ENABLE_CURL )
-        find_anyproject( CURL REQUIRED )
+        find_anyproject(CURL REQUIRED)
     endif()
 
     if( EXIV2_ENABLE_SSH )
@@ -50,4 +50,4 @@ else()
     endif ()
 endif()
 
-find_anyproject( Iconv )
+find_anyproject(ICONV REQUIRED)

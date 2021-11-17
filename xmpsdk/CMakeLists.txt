@@ -73,6 +73,6 @@ if (EXV_HAVE_STDINT_H)
     target_compile_definitions(${LIB_NAME}-xmp PRIVATE EXV_HAVE_STDINT_H)
 endif()
 
-if (BUILD_SHARED_LIBS)
+if (BUILD_SHARED_LIBS OR OSX_FRAMEWORK)
     set_property(TARGET ${LIB_NAME}-xmp PROPERTY POSITION_INDEPENDENT_CODE ON)
 endif()

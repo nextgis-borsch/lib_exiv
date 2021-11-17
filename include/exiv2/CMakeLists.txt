@@ -20,56 +20,9 @@
 # DEALINGS IN THE SOFTWARE.
 ################################################################################
 
-if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
+if(NOT SKIP_INSTALL_HEADERS AND NOT SKIP_INSTALL_ALL)
     install(FILES
-            asfvideo.hpp
-            basicio.hpp
-            bigtiffimage.hpp
-            bmpimage.hpp
-            config.h
-            convert.hpp
-            cr2image.hpp
-            crwimage.hpp
-            datasets.hpp
-            easyaccess.hpp
-            epsimage.hpp
-            error.hpp
-            exif.hpp
-            exiv2.hpp
-            futils.hpp
-            gifimage.hpp
-            http.hpp
-            image.hpp
-            ini.hpp
-            iptc.hpp
-            jp2image.hpp
-            jpgimage.hpp
-            matroskavideo.hpp
-            metadatum.hpp
-            mrwimage.hpp
-            orfimage.hpp
-            pgfimage.hpp
-            pngimage.hpp
-            preview.hpp
-            properties.hpp
-            psdimage.hpp
-            quicktimevideo.hpp
-            rafimage.hpp
-            riffvideo.hpp
-            rw2image.hpp
-            rwlock.hpp
-            slice.hpp
-            ssh.hpp
-            tags.hpp
-            tgaimage.hpp
-            tiffimage.hpp
-            types.hpp
-            utilsvideo.hpp
-            value.hpp
-            version.hpp
-            webpimage.hpp
-            xmp_exiv2.hpp
-            xmpsidecar.hpp
+            ${INST_HEADER}
         DESTINATION
-            ${INSTALL_INC_DIR}/exiv2)
+            ${INSTALL_INC_DIR})
 endif()

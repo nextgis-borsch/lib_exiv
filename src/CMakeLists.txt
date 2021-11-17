@@ -54,50 +54,67 @@ add_library( ${LIB_NAME}_int OBJECT
     unused.h
 )
 
-add_library( ${LIB_NAME}
-    ../include/exiv2/config.h
-    ../include/exiv2/exiv2.hpp
-    ../include/exiv2/rwlock.hpp
-    ../include/exiv2/slice.hpp
-    basicio.cpp             ../include/exiv2/basicio.hpp
+set(TARGET_OBJECTS
+    basicio.cpp
     bigtiffimage.cpp
-    bmpimage.cpp            ../include/exiv2/bmpimage.hpp
-    convert.cpp             ../include/exiv2/convert.hpp
-    cr2image.cpp            ../include/exiv2/cr2image.hpp
-    crwimage.cpp            ../include/exiv2/crwimage.hpp
-    datasets.cpp            ../include/exiv2/datasets.hpp
-    easyaccess.cpp          ../include/exiv2/easyaccess.hpp
-    epsimage.cpp            ../include/exiv2/epsimage.hpp
-    error.cpp               ../include/exiv2/error.hpp
-    exif.cpp                ../include/exiv2/exif.hpp
-    futils.cpp              ../include/exiv2/futils.hpp
-    gifimage.cpp            ../include/exiv2/gifimage.hpp
-    http.cpp                ../include/exiv2/http.hpp
-    image.cpp               ../include/exiv2/image.hpp
-    ini.cpp                 ../include/exiv2/ini.hpp
-    iptc.cpp                ../include/exiv2/iptc.hpp
-    jp2image.cpp            ../include/exiv2/jp2image.hpp
-    jpgimage.cpp            ../include/exiv2/jpgimage.hpp
-    metadatum.cpp           ../include/exiv2/metadatum.hpp
-    mrwimage.cpp            ../include/exiv2/mrwimage.hpp
-    orfimage.cpp            ../include/exiv2/orfimage.hpp
-    pgfimage.cpp            ../include/exiv2/pgfimage.hpp
-    preview.cpp             ../include/exiv2/preview.hpp
-    properties.cpp          ../include/exiv2/properties.hpp
-    psdimage.cpp            ../include/exiv2/psdimage.hpp
-    rafimage.cpp            ../include/exiv2/rafimage.hpp
-    rw2image.cpp            ../include/exiv2/rw2image.hpp
-    tags.cpp                ../include/exiv2/tags.hpp
-    tgaimage.cpp            ../include/exiv2/tgaimage.hpp
-    tiffimage.cpp           ../include/exiv2/tiffimage.hpp
-    types.cpp               ../include/exiv2/types.hpp
-    value.cpp               ../include/exiv2/value.hpp
-    version.cpp             ../include/exiv2/version.hpp
-    webpimage.cpp           ../include/exiv2/webpimage.hpp
-    xmp.cpp                 ../include/exiv2/xmp_exiv2.hpp
-    xmpsidecar.cpp          ../include/exiv2/xmpsidecar.hpp
+    bmpimage.cpp
+    convert.cpp
+    cr2image.cpp
+    crwimage.cpp
+    datasets.cpp
+    easyaccess.cpp
+    epsimage.cpp
+    error.cpp
+    exif.cpp
+    futils.cpp
+    gifimage.cpp
+    http.cpp
+    image.cpp
+    ini.cpp
+    iptc.cpp
+    jp2image.cpp
+    jpgimage.cpp
+    metadatum.cpp
+    mrwimage.cpp
+    orfimage.cpp
+    pgfimage.cpp
+    preview.cpp
+    properties.cpp
+    psdimage.cpp
+    rafimage.cpp
+    rw2image.cpp
+    tags.cpp
+    tgaimage.cpp
+    tiffimage.cpp
+    types.cpp
+    value.cpp
+    version.cpp
+    webpimage.cpp
+    xmp.cpp
+    xmpsidecar.cpp
     $<TARGET_OBJECTS:${LIB_NAME}_int>
 )
+
+set(INST_HEADER ${INST_HEADER}
+    ${CMAKE_BINARY_DIR}/exv_conf.h
+    ${CMAKE_BINARY_DIR}/exiv2lib_export.h
+)
+
+if(OSX_FRAMEWORK)
+    add_library(${LIB_NAME} SHARED ${TARGET_OBJECTS} ${INST_HEADER})
+    set_property(SOURCE ${INST_HEADER} PROPERTY MACOSX_PACKAGE_LOCATION "Headers/exiv2")
+    set_target_properties(${LIB_NAME} PROPERTIES
+      FRAMEWORK TRUE
+      FRAMEWORK_VERSION ${FRAMEWORK_VERSION}
+      MACOSX_FRAMEWORK_SHORT_VERSION_STRING ${VERSION}
+      MACOSX_FRAMEWORK_BUNDLE_VERSION ${VERSION}
+      MACOSX_FRAMEWORK_IDENTIFIER org.exiv2
+      XCODE_ATTRIBUTE_INSTALL_PATH "@rpath"
+      PUBLIC_HEADER "${INST_HEADER}"
+    )
+else()
+    add_library( ${LIB_NAME} ${TARGET_OBJECTS} ${INST_HEADER})
+endif()
 
 generate_export_header(${LIB_NAME}
     EXPORT_MACRO_NAME EXIV2API
@@ -234,6 +251,13 @@ endif()
 export(TARGETS ${TARGETS}
    FILE ${PROJECT_BINARY_DIR}/${PACKAGE_UPPER_NAME}Targets.cmake)
 
+if(NOT SKIP_INSTALL_HEADERS AND NOT SKIP_INSTALL_ALL)
+    install(FILES
+        ${CMAKE_BINARY_DIR}/exv_conf.h
+        ${CMAKE_BINARY_DIR}/exiv2lib_export.h
+        DESTINATION ${INSTALL_INC_DIR})
+endif()
+
 if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
     install(TARGETS ${TARGETS}
         EXPORT ${PACKAGE_UPPER_NAME}Targets
@@ -242,11 +266,6 @@ if(NOT SKIP_INSTALL_LIBRARIES AND NOT SKIP_INSTALL_ALL)
         ARCHIVE DESTINATION ${INSTALL_LIB_DIR}
         INCLUDES DESTINATION ${INSTALL_INC_DIR}
         FRAMEWORK DESTINATION ${INSTALL_LIB_DIR} )
-        
-    install(FILES
-        ${CMAKE_BINARY_DIR}/exv_conf.h
-        ${CMAKE_BINARY_DIR}/exiv2lib_export.h
-        DESTINATION ${INSTALL_INC_DIR}/exiv2)
         
     # Install the <Package>Config.cmake
     install(FILES

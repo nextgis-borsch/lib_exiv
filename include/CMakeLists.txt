@@ -20,4 +20,56 @@
 # DEALINGS IN THE SOFTWARE.
 ################################################################################
 
+set(INST_HEADER 
+    ${PROJECT_SOURCE_DIR}/include/exiv2/asfvideo.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/basicio.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/bigtiffimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/bmpimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/config.h
+    ${PROJECT_SOURCE_DIR}/include/exiv2/convert.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/cr2image.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/crwimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/datasets.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/easyaccess.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/epsimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/error.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/exif.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/exiv2.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/futils.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/gifimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/http.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/image.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/ini.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/iptc.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/jp2image.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/jpgimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/matroskavideo.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/metadatum.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/mrwimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/orfimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/pgfimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/pngimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/preview.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/properties.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/psdimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/quicktimevideo.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/rafimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/riffvideo.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/rw2image.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/rwlock.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/slice.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/ssh.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/tags.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/tgaimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/tiffimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/types.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/utilsvideo.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/value.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/version.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/webpimage.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/xmp_exiv2.hpp
+    ${PROJECT_SOURCE_DIR}/include/exiv2/xmpsidecar.hpp
+    PARENT_SCOPE
+)
+
 add_subdirectory(exiv2)

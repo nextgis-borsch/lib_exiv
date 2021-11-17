@@ -20,7 +20,8 @@
 # DEALINGS IN THE SOFTWARE.
 ################################################################################
 
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
+
 project(exiv)
 
 if(NOT DEFINED PACKAGE_VENDOR)
@@ -45,7 +46,7 @@ if(OSX_FRAMEWORK)
     set(INSTALL_BIN_DIR "bin" CACHE INTERNAL "Installation directory for executables" FORCE)
     set(INSTALL_LIB_DIR "Library/Frameworks" CACHE INTERNAL "Installation directory for libraries" FORCE)
     set(INSTALL_CMAKECONF_DIR ${INSTALL_LIB_DIR}/${PROJECT_NAME}.framework/Resources/CMake CACHE INTERNAL "Installation directory for cmake config files" FORCE)
-    set(INSTALL_INC_DIR ${INSTALL_LIB_DIR}/${PROJECT_NAME}.framework/Headers CACHE INTERNAL "Installation directory for headers" FORCE)
+    set(INSTALL_INC_DIR ${INSTALL_LIB_DIR}/${PROJECT_NAME}.framework/Headers/exiv2 CACHE INTERNAL "Installation directory for headers" FORCE)
     set(SKIP_INSTALL_HEADERS ON)
     set(SKIP_INSTALL_EXECUTABLES ON)
     set(SKIP_INSTALL_FILES ON)
@@ -56,7 +57,7 @@ else()
 
     set(INSTALL_BIN_DIR ${CMAKE_INSTALL_BINDIR} CACHE INTERNAL "Installation directory for executables" FORCE)
     set(INSTALL_LIB_DIR ${CMAKE_INSTALL_LIBDIR} CACHE INTERNAL "Installation directory for libraries" FORCE)
-    set(INSTALL_INC_DIR ${CMAKE_INSTALL_INCLUDEDIR} CACHE INTERNAL "Installation directory for headers" FORCE)
+    set(INSTALL_INC_DIR ${CMAKE_INSTALL_INCLUDEDIR}/exiv2 CACHE INTERNAL "Installation directory for headers" FORCE)
     set(INSTALL_PKGCONFIG_DIR "${INSTALL_LIB_DIR}/pkgconfig" CACHE INTERNAL "Installation directory for pkgconfig (.pc) files" FORCE)
     set(INSTALL_CMAKECONF_DIR ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME}/CMake CACHE INTERNAL "Installation directory for cmake config files" FORCE)
 endif()
@@ -73,6 +74,10 @@ check_version(PROJECT_VERSION_MAJOR PROJECT_VERSION_MINOR PROJECT_VERSION_PATCH)
 set(VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
 set(PROJECT_VERSION ${VERSION})
 report_version(${PROJECT_NAME} ${VERSION})
+
+if(OSX_FRAMEWORK)
+    set(FRAMEWORK_VERSION "${PROJECT_VERSION_MAJOR}")
+endif()
 
 include(GenerateExportHeader)
 
@@ -115,6 +120,7 @@ include_directories(${CMAKE_BINARY_DIR})  # Make the exv_conf.h file visible for
 
 if( EXIV2_ENABLE_XMP )
     add_subdirectory( xmpsdk )
+    # set(TARGETS ${TARGETS} ${LIB_NAME}-xmp)
 endif()
 
 include(cmake/compilerFlagsExiv2.cmake REQUIRED)
@@ -130,7 +136,7 @@ if(REGISTER_PACKAGE)
    export(PACKAGE ${PACKAGE_UPPER_NAME})
 endif()
 
-# Create the ZLIBConfig.cmake file
+# Create the EXIVConfig.cmake file
 configure_file(cmake/PackageConfig.cmake.in
    ${PROJECT_BINARY_DIR}/${PACKAGE_UPPER_NAME}Config.cmake @ONLY)
 
